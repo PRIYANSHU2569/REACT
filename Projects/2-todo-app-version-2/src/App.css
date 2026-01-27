@@ -1,0 +1,23 @@
+h1{
+  font-size: 40px;
+  font-weight: bold;
+  margin: 10px;
+  margin-bottom: 30px ;
+}
+
+input{
+  width: 100%;
+}
+.items-container{
+  text-align: left;
+}
+
+.pg-btn{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+.pg-row{
+  margin : 10px 5px;
+}
