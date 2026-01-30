@@ -1,13 +1,14 @@
-import TodoItem from "./TodoItem.jsx";
+import TodoItem from "./TodoItem";
+import styles from "./TodoItems.module.css";
 
-
-const TodoItems = ({todoItems}) => {
+const TodoItems = ({ todoItems }) => {
   return (
-    <div className="items-container">
-      <TodoItem todoDate="25/12/2023" todoitem="Go to college">
-      </TodoItem>
-      <TodoItem todoDate="24/12/2023" todoitem="Buy Milk"></TodoItem>
-      </div>
-  )
-}
+    <div className={styles.itemsContainer}>
+      {todoItems.map((item) => (
+        <TodoItem key = {item.name} todoDate={item.dueDate} todoName={item.name}></TodoItem>
+      ))}
+    </div>
+  );
+};
+
 export default TodoItems;
