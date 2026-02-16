@@ -23,4 +23,4 @@ const FoodItems = ({ items }) => {
   );
 };
 
-export default FoodItems;
+export default FoodItems; 
