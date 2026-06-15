@@ -1,41 +1,40 @@
 import { IoIosAdd } from "react-icons/io";
-import { useState } from "react";
+import { useRef} from "react";
 function AddTodo({onNewItem}) {
-  const [todoName, setTodoName] = useState("");
-  const [todoDueDate, setTodoDueDate] = useState("");
+  
+  const todoNameElement = useRef();
+  const dueDateElement = useRef();
 
-  const handleTodoNameChange = (event) => {
-    setTodoName(event.target.value);
-  };
-
-  const handleTodoDueDateChange = (event) => {
-    setTodoDueDate(event.target.value);
-  };
-
-  const handleAddButtonClick = () => {
+  const handleAddButtonClick = (event) => {
+    event.preventDefault();
+    const todoName = todoNameElement.current.value;
+    const  todoDueDate = dueDateElement.current.value;
+    todoNameElement.current.value= "";
+    dueDateElement.current.value = "";
     onNewItem(todoName, todoDueDate);
-    setTodoName("");
-    setTodoDueDate("");
   };
   return (
     <div className="container text-center">
-      <div className="row kg-row">
+      <form className="row kg-row" onSubmit={handleAddButtonClick} >
         <div className="col-6">
-          <input type="text" placeholder="Enter Todo Here" 
-          value={todoName}
-          onChange ={handleTodoNameChange} />
+          <input type="text"
+          ref = {todoNameElement}
+           placeholder="Enter Todo Here" 
+        
+          />
         </div>
         <div className="col-4">
-          <input type="date" value={todoDueDate} onChange = {handleTodoDueDateChange} />
+          <input type="date" 
+           ref = {dueDateElement}
+         />
         </div>
         <div className="col-2">
-          <button type="button" className="btn btn-success kg-button"
-          onClick={handleAddButtonClick}
+          <button className="btn btn-success kg-button"
           >
             <IoIosAdd />
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
