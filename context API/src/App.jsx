@@ -4,19 +4,17 @@ import TodoItems from "./components/TodoItems";
 import "./App.css";
 
 import WelcomeMessage from "./components/WelcomeMessage";
-import {TodoContextProvider} from "./store/todo-items-store";
-
-
+import { TodoContextProvider } from "./store/todo-items-store";
 
 function App() {
-   <TodoContextProvider>  
+  <TodoContextProvider>
     <center className="todo-container">
       <AppName />
-      <AddTodo  />
-      <WelcomeMessage/>
-      <TodoItems ></TodoItems>
+      <AddTodo />
+      <WelcomeMessage />
+      <TodoItems></TodoItems>
     </center>
-   </TodoContextProvider>
+  </TodoContextProvider>;
 }
 
 export default App;
