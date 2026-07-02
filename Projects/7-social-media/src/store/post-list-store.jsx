@@ -1,7 +1,56 @@
-import { createContext } from "react";
+import { createContext, useReducer } from "react";
+// import {postListReducer} from "./post-list-reducer";
 
-const PostList = createContext({});
+export const PostList = createContext({
+  postList: [],
+  addPost: () => {},
+  deletePost: () => {},
+});
+
+const postListReducer = (currPostList, action) => {
+  let newPostList = currPostList;
+  if (action.type === "DELETE_POST") {
+    newPostList = currPostList.filter((post) => post.id !== action.payload);
+  }
+  return newPostList;
+};
 
 const PostListProvider = ({ children }) => {
-  return <PostList.Provider value={{}}>{children}</PostList.Provider>;
+  const [postList, dispatchPostList] = useReducer(
+    postListReducer,
+    DEFAULT_POST_LIST,
+  );
+
+  const addPost = () => {};
+
+  const deletePost = (postId) => {
+    dispatchPostList({ type: "DELETE_POST", payload: postId });
+  };
+
+  return (
+    <PostList.Provider value={{ postList, addPost, deletePost }}>
+      {children}
+    </PostList.Provider>
+  );
 };
+
+const DEFAULT_POST_LIST = [
+  {
+    id: "1",
+    title: "Going to Mumbai",
+    body: "I am going to Mumbai for a vacation. I am excited to explore the city and its culture.",
+    reactions: 2,
+    userId: "user-9",
+    tags: ["travel", "vacation", "Mumbai"],
+  },
+  {
+    id: "2",
+    title: "Planning a Trip to Paris",
+    body: "I am planning a trip to Paris next month. I can't wait to see the Eiffel Tower and try some authentic French cuisine.",
+    reactions: 15,
+    userId: "user-12",
+    tags: ["travel", "vacation", "Paris"],
+  },
+];
+
+export default PostListProvider;
